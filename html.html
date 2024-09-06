@@ -15,22 +15,22 @@
 <div style="display: flex; justify-content: center;align-items: center;"
 <table>
 <tr>
-<td colspan="2"   style="background-color: white"><h2>Elementos de HTML</h2></td>
+      <td colspan="2"   style="background-color: white"><h2>Elementos de HTML</h2></td>
 </tr>
-<tr><td><input id="captura" type="text" placeholder="Escribe tu nombre"></td><td><input type="button" value="Agregar" onclick="agregarFila()" ></td></tr>
+    <tr><td><input id="captura" type="text" placeholder="Escribe tu nombre"></td><td><input type="button" value="Agregar" onclick="agregarFila()" ></td></tr>
 </table>
 </div>
 <center>
   <table id="tabla">
     <tr>
-    <td   style="background-color: white ">Elementos</td>
-    <td   style="background-color: white ">Descripcion</td>
+      <td   style="background-color: white ">Elementos</td>
+      <td   style="background-color: white ">Descripcion</td>
     </tr>
     <tr>
       <td   style="background-color: white">Prueba</td>
       <td id="ejemplo"  style="background-color: white">aqui ira otro texto.</td>
     </tr>
-    </table>
+</table>
 </center>
 
 <script>
@@ -47,44 +47,39 @@
           tableData.push(data);
       }
       localStorage.setItem("tableData", JSON.stringify(tableData));
-      imput.value='';
-      input.value=value;
   }
-
-  
   function loadTableData() {
       const savedData = localStorage.getItem("tableData");
       if (savedData) {
           const tableData = JSON.parse(savedData);
           const table = document.getElementById("tabla");
           const addedValues = [];
-      }
-            
-       
-      
-    
-    
+      }  
   }
   
   function agregarFila() {
       const nombre = document.getElementById("captura").value;
+      const nombreSinEspacios = nombre.trim();
+
+   
+    if (nombreSinEspacios === "") {
+        
+        alert("Por favor, ingresa un valor válido.");
+        return;
+    }
       const table = document.getElementById("tabla");
       const newRow = table.insertRow(-1);
       newRow.insertCell(0).textContent = table.rows.length - 1;
       newRow.insertCell(1).textContent = nombre;
       newRow.insertCell(2).innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button>';
       saveTableData();
+      document.getElementById("captura").value="";
   }
-
-  
   function eliminarFila(button) {
       button.parentNode.parentNode.remove();
       saveTableData();
   }
-
- 
   loadTableData();
 </script>
   </body>
   </html>
-
