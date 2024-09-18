@@ -111,7 +111,10 @@
       saveTableData();
         }
 
-        
+        if (window.confirm('¿Estás seguro de que deseas eliminar todos los datos locales de este sitio?')) {
+  localStorage.clear();
+  alert('Datos eliminados correctamente.');
+}
         window.onload = loadTableData;
     </script>
 </body>
